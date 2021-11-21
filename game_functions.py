@@ -8,19 +8,14 @@ from bullet import Bullet
 
 from alien import Alien
 
-from stars import Stars
-
 import json
 
-def update_screen(ai_settings, screen, stats, stars, sb, ship, aliens, bullets, play_button):
+def update_screen(ai_settings, screen, stats, star, sb, ship, aliens, bullets, play_button):
     """Обновляет изображения на экране и отображает новый экран."""
     # При каждом проходе цикла перерисовывается экран.
     screen.fill(ai_settings.bg_color)
 
-    # Все пули выводятся позади изображенй корабля и пришельцев.
-    stars.draw(screen)  # Вывод на экран группы звезд
-
-    # stars.blitme() # Используется для вывода изоражения одного рисунка, в качестве фонового
+    star.blitme() # Используется для вывода изоражения одного рисунка, в качестве фонового
     ship.blitme()
     aliens.draw(screen)
     for bullet in bullets.sprites():
@@ -52,7 +47,7 @@ def check_keydown_events(event, ai_settings, screen, stats, ship, aliens, bullet
     elif event.key == pygame.K_q:
         sys.exit()
 
-        # Код согласно задани 14-1
+        # Код согласно задания 14-1
     elif event.key == pygame.K_p:
         stats.game_active = True
         if stats.game_active:
@@ -204,11 +199,6 @@ def get_number_rows(ai_settings, ship_height, alien_height):
     avialable_space_y = (ai_settings.screen_height - (3 * alien_height) - ship_height)
     number_rows = int(avialable_space_y / (2 * alien_height))
     return number_rows
-
-def get_create_stars(ai_settings, screen, stars):
-    for star in range(50):
-        star = Stars(ai_settings, screen)
-        stars.add(star)
 
 def ship_hit(ai_settings, stats, screen, sb, ship, aliens, bullets):
     """Обрабатывает столкновение корабля с пришельцем."""

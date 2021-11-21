@@ -14,6 +14,8 @@ from button import Button
 
 from scoreboard import Scoreboard
 
+from stars import Stars
+
 def run_game():
     # Инициализирует игру и создает объект экрана.
     pygame.init()
@@ -33,15 +35,12 @@ def run_game():
     # Создание группы для храненияфлота пришельцев.
     aliens = Group()
 
-    # Создает группу для хранения звезд
-    stars = Group()
-
+    # Создание фоноого рисунка.
+    star = Stars(screen, ai_settings)
 
     # Создание флота пришельцев.
     gf.create_fleet(ai_settings, screen, ship, aliens)
 
-    # Расположение звезд на небе.
-    gf.get_create_stars(ai_settings, screen, stars)
 
     # Создание экземпляра для хранения игровой статистики.
     stats = GameStats(ai_settings)
@@ -49,17 +48,14 @@ def run_game():
     # Создание экземпляра для хранения игрового счета.
     sb = Scoreboard(ai_settings, screen, stats)
 
-
      # Запуск основного цикла игры.
     while True:
         gf.check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets)
-
+        gf.update_screen(ai_settings, screen, stats, star, sb, ship, aliens, bullets, play_button)
         if stats.game_active:
             ship.update()
             gf.update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets)
             gf.update_aliens(ai_settings, screen, stats, sb, ship, aliens, bullets)
-
-        gf.update_screen(ai_settings, screen, stats, stars, sb, ship, aliens, bullets, play_button)
 
 run_game()
 
