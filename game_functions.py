@@ -137,7 +137,7 @@ def update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets):
 def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets):
     """Обраотка коллизий пуль с пришельцами."""
     # Удаление пуль и пришельцев, участвующих в коллизиях.
-    colisions = pygame.sprite.groupcollide(bullets, aliens, False, True)
+    colisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
     if colisions:
         for aliens in colisions.values():
             stats.score += ai_settings.alien_points * len(aliens)
