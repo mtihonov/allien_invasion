@@ -21,6 +21,8 @@ Keys to control the ship:
 
   __"Down"__ - The movement of the ship on down.
   
+  __"Space"__ - Shoot.
+  
   ## About project
   
   The game is written using the Pygame library.
